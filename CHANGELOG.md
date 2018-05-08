@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.2.2
+* Use push_tag and push_branch
+
 ## 2.2.1
 * Supports push tag
 
