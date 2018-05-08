@@ -42,7 +42,7 @@ defmodule Eliver.Git do
     git "add", "CHANGELOG.md"
     git "add", "VERSION"
     git "commit", ["-m", commit_message(new_version, changelog_entries)]
-    git "tag", ["#{current_branch()} #{new_version}", "-a", "-m", "Version: #{new_version}"]
+    git "tag", ["#{current_branch()}_#{new_version}", "-a", "-m", "Version: #{new_version}"]
   end
 
   def push!(new_version) do
