@@ -48,7 +48,7 @@ defmodule Mix.Tasks.Eliver.Bump do
     cond do
       !Eliver.Git.is_tracking_branch? ->
         {:error, "This branch is not tracking a remote branch. Aborting..."}
-      !Eliver.Git.on_master? && !Eliver.Git.on_develop? && !continue_on_branch?() ->
+      !Eliver.Git.on_master? && !Eliver.Git.on_staging? && !continue_on_branch?() ->
         {:error, "Aborting"}
       Eliver.Git.index_dirty? ->
         {:error, "Git index dirty. Commit changes before continuing"}

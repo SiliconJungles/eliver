@@ -30,8 +30,8 @@ defmodule Eliver.Git do
     current_branch() == "master"
   end
 
-  def on_develop? do
-    current_branch() == "develop"
+  def on_staging? do
+    current_branch() == "staging"
   end
 
   def fetch! do
@@ -42,7 +42,7 @@ defmodule Eliver.Git do
     git "add", "CHANGELOG.md"
     git "add", "VERSION"
     git "commit", ["-m", commit_message(new_version, changelog_entries)]
-    git "tag", ["#{new_version}", "-a", "-m", "Version: #{new_version}"]
+    git "tag", ["#{current_branch()} #{new_version}", "-a", "-m", "Version: #{new_version}"]
   end
 
   def push!(new_version) do
@@ -71,9 +71,9 @@ defmodule Eliver.Git do
 
   defp commit_message(new_version, changelog_entries) do
     """
-Version #{new_version}:
+      Version #{new_version}:
 
-#{Enum.map(changelog_entries, fn(x) -> "* " <> x end) |> Enum.join("\n")}
+      #{Enum.map(changelog_entries, fn(x) -> "* " <> x end) |> Enum.join("\n")}
     """
   end
 
