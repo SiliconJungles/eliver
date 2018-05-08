@@ -17,7 +17,7 @@ Eliver...
 
 ```elixir
 def deps do
-  [{:eliver, github: "SiliconJungles/eliver"}]
+  [{:eliver, github: "SiliconJungles/eliver", branch: "master_2.2.2"}]
 end
 ```
 
