@@ -61,7 +61,7 @@ defmodule Mix.Tasks.Eliver.Bump do
   end
 
   defp continue_on_branch? do
-    question = "You are not on master or develop. It is not recommended to create releases from a branch unless they're maintenance releases. Continue?"
+    question = "You are not on master or staging. It is not recommended to create releases from a branch unless they're maintenance releases. Continue?"
     result = ask question, false
     case result do
       {:ok, value} -> value
