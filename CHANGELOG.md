@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.4
+* Support on_develop? branch
+
 ## 2.0.3
 * Improving the change log input user prompt
 
