@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.2.1
+* Supports push tag
+
 ## 2.2.0
 * Set the prefix when tag is staging or master.
 
