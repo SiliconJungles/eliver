@@ -48,7 +48,7 @@ defmodule Mix.Tasks.Eliver.Bump do
     cond do
       !Eliver.Git.is_tracking_branch? ->
         {:error, "This branch is not tracking a remote branch. Aborting..."}
-      !Eliver.Git.on_master? && !continue_on_branch?() ->
+      !Eliver.Git.on_master? && !Eliver.Git.on_develop? && !continue_on_branch?() ->
         {:error, "Aborting"}
       Eliver.Git.index_dirty? ->
         {:error, "Git index dirty. Commit changes before continuing"}
@@ -60,7 +60,7 @@ defmodule Mix.Tasks.Eliver.Bump do
   end
 
   defp continue_on_branch? do
-    question = "You are not on master. It is not recommended to create releases from a branch unless they're maintenance releases. Continue?"
+    question = "You are not on master or develop. It is not recommended to create releases from a branch unless they're maintenance releases. Continue?"
     result = ask question, false
     case result do
       {:ok, value} -> value
@@ -73,7 +73,7 @@ defmodule Mix.Tasks.Eliver.Bump do
   end
 
   defp get_changelog_entries do
-    {:ok, result} = get_list "Enter the changes, enter a blank line when you're done"
+    {:ok, result} = get_list "Enter the changes, enter a BLANK line when you're done"
     result
   end
 

@@ -30,6 +30,10 @@ defmodule Eliver.Git do
     current_branch() == "master"
   end
 
+  def on_develop? do
+    current_branch() == "develop"
+  end
+
   def fetch! do
     git "fetch", "-q"
   end
