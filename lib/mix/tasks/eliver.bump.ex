@@ -41,8 +41,8 @@ defmodule Mix.Tasks.Eliver.Bump do
     Eliver.ChangeLogFile.bump(new_version, changelog_entries)
     Eliver.Git.commit!(new_version, changelog_entries)
     say "Pushing to origin..."
-    Eliver.Git.push!(new_version)
     Eliver.Git.push_tag!
+    Eliver.Git.push_branch!
   end
 
   defp check_for_git_problems do

@@ -53,6 +53,10 @@ defmodule Eliver.Git do
     git "push", ["--tag"]
   end
 
+  def push_branch! do
+    git "push", ["origin", current_branch()]
+  end
+
   defp git(command, args) when is_list(args) do
     run_git_command(command, args)
   end
