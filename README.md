@@ -11,6 +11,10 @@ Eliver...
 * creates a tag with `staging` or `master` as a prefix
 * pushes to origin
 
+**NOTES**
+
+- We have customized this package to work for SiliconJungles's projects.
+
 ## Installation
 
   1. Add `eliver` to your list of dependencies in `mix.exs`:
