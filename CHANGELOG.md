@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.2.3
+* bump only run if the current branch is master or staging.
+
 ## 2.2.2
 * Use push_tag and push_branch
 
