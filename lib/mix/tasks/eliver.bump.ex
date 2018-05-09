@@ -49,8 +49,8 @@ defmodule Mix.Tasks.Eliver.Bump do
     cond do
       !Eliver.Git.is_tracking_branch? ->
         {:error, "This branch is not tracking a remote branch. Aborting..."}
-      !Eliver.Git.on_master? && !Eliver.Git.on_staging? && !continue_on_branch?() ->
-        {:error, "Aborting"}
+      !Eliver.Git.on_master? || !Eliver.Git.on_staging? ->
+        {:error, "You are not on master or staging branch. Please checkout first and run the bump again!"}
       Eliver.Git.index_dirty? ->
         {:error, "Git index dirty. Commit changes before continuing"}
       Eliver.Git.fetch! && Eliver.Git.upstream_changes? ->
@@ -60,14 +60,6 @@ defmodule Mix.Tasks.Eliver.Bump do
     end
   end
 
-  defp continue_on_branch? do
-    question = "You are not on master or staging. It is not recommended to create releases from a branch unless they're maintenance releases. Continue?"
-    result = ask question, false
-    case result do
-      {:ok, value} -> value
-      {:error, _}  -> continue_on_branch?()
-    end
-  end
 
   defp get_new_version do
     Eliver.VersionFile.version |> Eliver.next_version(get_bump_type())
