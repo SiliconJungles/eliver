@@ -49,7 +49,7 @@ defmodule Mix.Tasks.Eliver.Bump do
     cond do
       !Eliver.Git.is_tracking_branch? ->
         {:error, "This branch is not tracking a remote branch. Aborting..."}
-      !Eliver.Git.on_master? || !Eliver.Git.on_staging? ->
+      !Eliver.Git.on_master? && !Eliver.Git.on_staging? ->
         {:error, "You are not on master or staging branch. Please checkout first and run the bump again!"}
       Eliver.Git.index_dirty? ->
         {:error, "Git index dirty. Commit changes before continuing"}
@@ -59,7 +59,6 @@ defmodule Mix.Tasks.Eliver.Bump do
         {:ok}
     end
   end
-
 
   defp get_new_version do
     Eliver.VersionFile.version |> Eliver.next_version(get_bump_type())
