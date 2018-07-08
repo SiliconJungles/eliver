@@ -40,8 +40,8 @@ defmodule Eliver.Git do
     git("fetch", "-q")
   end
 
-  def commit!(new_version, changelog_entries) do
-    git("add", "CHANGELOG.md")
+  def commit!(new_version, changelog_entries, current_branch) do
+    git("add", "#{current_branch}_CHANGELOG.md")
     git("add", "VERSION")
     git("commit", ["-m", commit_message(new_version, changelog_entries)])
     git("tag", ["#{current_branch()}_#{new_version}", "-a", "-m", "Version: #{new_version}"])

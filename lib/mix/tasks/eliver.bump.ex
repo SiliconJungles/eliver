@@ -42,7 +42,7 @@ defmodule Mix.Tasks.Eliver.Bump do
   defp make_changes(new_version, changelog_entries, current_branch) do
     Eliver.VersionFile.bump(new_version)
     Eliver.ChangeLogFile.bump(new_version, changelog_entries, "#{current_branch}_CHANGELOG.md")
-    Eliver.Git.commit!(new_version, changelog_entries)
+    Eliver.Git.commit!(new_version, changelog_entries, current_branch)
     say("Pushing to origin...")
     Eliver.Git.push_tag!()
     Eliver.Git.push_branch!()
