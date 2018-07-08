@@ -6,11 +6,13 @@ defmodule Eliver.ChangeLogFileTest do
     File.copy("test/support/CHANGELOG_template.md", "test/support/CHANGELOG.md")
     File.copy("test/support/CHANGELOG2_template.md", "test/support/CHANGELOG2.md")
     File.rm("test/support/test.md")
-    on_exit fn ->
+
+    on_exit(fn ->
       File.rm("test/support/CHANGELOG.md")
       File.rm("test/support/CHANGELOG2.md")
       File.rm("test/support/test.md")
-    end
+    end)
+
     :ok
   end
 
@@ -55,11 +57,11 @@ defmodule Eliver.ChangeLogFileTest do
       * e2
       """
     end
+
     test "it creates the changelog file if it doesn't exist" do
       Eliver.ChangeLogFile.bump("1.1.0", ["e1", "e2"], "test/support/test.md")
       {:ok, new_change_log_contents} = File.read("test/support/test.md")
       assert new_change_log_contents == expected_new_changelog_contents()
     end
   end
-
 end

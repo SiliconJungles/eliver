@@ -1,4 +1,3 @@
-require IEx
 defmodule EliverTest do
   use ExUnit.Case
   doctest Eliver
@@ -16,5 +15,4 @@ defmodule EliverTest do
       assert Eliver.next_version("1.0.1", :major) == "2.0.0"
     end
   end
-
 end

@@ -6,8 +6,8 @@ defmodule Eliver.Mixfile do
       app: :eliver,
       version: String.trim(File.read!("VERSION")),
       elixir: "~> 1.3",
-      build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       description: "Interactive semantic versioning for Elixir packages",
       deps: deps(),
       package: package()
@@ -20,10 +20,10 @@ defmodule Eliver.Mixfile do
 
   defp package do
     [
-      maintainers: ["Martin Pretorius"],
-      licenses:    ["MIT"],
-      links:       %{"GitHub" => "https://github.com/glasnoster/eliver"},
-      files:       ["lib", "mix.exs", "README.md", "VERSION"],
+      maintainers: ["Vincent Nguyen - SiliconJungles Pte Ltd"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/SiliconJungles/eliver"},
+      files: ["lib", "mix.exs", "README.md", "VERSION"]
     ]
   end
 

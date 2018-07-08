@@ -6,10 +6,11 @@ defmodule Eliver.VersionFileTest do
     File.copy("test/support/test_with_version_template", "test/support/test_with_version")
     File.copy("test/support/test_without_version_template", "test/support/test_without_version")
 
-    on_exit fn ->
+    on_exit(fn ->
       File.rm("test/support/test_with_version")
       File.rm("test/support/test_without_version")
-    end
+    end)
+
     :ok
   end
 
@@ -32,7 +33,9 @@ defmodule Eliver.VersionFileTest do
       case File.read("test/support/test_with_version") do
         {:ok, body} ->
           body
-        {:error, _} -> nil
+
+        {:error, _} ->
+          nil
       end
     end
 
@@ -46,7 +49,5 @@ defmodule Eliver.VersionFileTest do
       Eliver.VersionFile.bump("2.0.0", "test/support/test_with_version")
       assert versionfile_contents() == expected_versionfile_contents()
     end
-
   end
-
 end
