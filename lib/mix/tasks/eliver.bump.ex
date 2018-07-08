@@ -11,11 +11,11 @@ defmodule Mix.Tasks.Eliver.Bump do
       {:error, message} ->
         say(message, :red)
 
-      {:ok} ->
+      {:ok, current_branch} ->
         {new_version, changelog_entries} = get_changes()
 
         if allow_changes?(new_version, changelog_entries) do
-          make_changes(new_version, changelog_entries)
+          make_changes(new_version, changelog_entries, current_branch)
         end
     end
   end
@@ -39,9 +39,9 @@ defmodule Mix.Tasks.Eliver.Bump do
     end
   end
 
-  defp make_changes(new_version, changelog_entries) do
+  defp make_changes(new_version, changelog_entries, current_branch) do
     Eliver.VersionFile.bump(new_version)
-    Eliver.ChangeLogFile.bump(new_version, changelog_entries)
+    Eliver.ChangeLogFile.bump(new_version, changelog_entries, "#{current_branch}_CHANGELOG.md")
     Eliver.Git.commit!(new_version, changelog_entries)
     say("Pushing to origin...")
     Eliver.Git.push_tag!()
@@ -64,7 +64,7 @@ defmodule Mix.Tasks.Eliver.Bump do
         {:error, "This branch is not up to date with upstream"}
 
       true ->
-        {:ok}
+        {:ok, Eliver.Git.current_branch()}
     end
   end
 
