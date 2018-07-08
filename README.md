@@ -8,12 +8,16 @@ Eliver...
 * bumps the version in `mix.exs`
 * prompts the user for changelog entries and updates `CHANGELOG.md`
 * commits these changes
-* creates a tag with `staging` or `master` as a prefix
+
 * pushes to origin
 
 **NOTES**
 
 - We have customized this package to work for SiliconJungles's projects.
+
+  - Creates git tags with `staging` or `master` as a prefix.
+  - The eliver.bump only works if we're stay at `staging` or `master` branch.
+  - The changelog file is renamed to staging_changelog or master_changelog.
 
 ## Installation
 
