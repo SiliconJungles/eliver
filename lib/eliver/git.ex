@@ -43,6 +43,12 @@ defmodule Eliver.Git do
   def commit!(new_version, changelog_entries, current_branch) do
     git("add", "#{current_branch}_CHANGELOG.md")
     git("add", "VERSION")
+
+    mix_files()
+    |> Enum.each(fn x ->
+      git("add", x)
+    end)
+
     git("commit", ["-m", commit_message(new_version, changelog_entries)])
     git("tag", ["#{current_branch()}_#{new_version}", "-a", "-m", "Version: #{new_version}"])
   end
@@ -86,5 +92,24 @@ defmodule Eliver.Git do
 
       #{Enum.map(changelog_entries, fn x -> "* " <> x end) |> Enum.join("\n")}
     """
+  end
+
+  defp mix_files do
+    {mixes, _} =
+      System.cmd("find", [
+        ".",
+        "-type",
+        "f",
+        "-name",
+        "mix.exs",
+        "-not",
+        "-path",
+        "./deps/*",
+        "-not",
+        "-path",
+        "./*/**/node_modules/*"
+      ])
+
+    mixes |> String.split("\n", trim: true)
   end
 end
