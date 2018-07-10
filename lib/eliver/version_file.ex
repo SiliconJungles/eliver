@@ -1,6 +1,6 @@
 defmodule Eliver.VersionFile do
   @version_regex ~r/([0-9]+\.[0-9]+\.[0-9]+)/
-  @mix_version_regex ~r/version:.([0-9]+\.[0-9]+\.[0-9]+)/
+  @mix_version_regex ~r/version: ([0-9]+\.[0-9]+\.[0-9]+)/
 
   def version(filename \\ "VERSION") do
     case File.read(filename) do
