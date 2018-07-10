@@ -1,6 +1,6 @@
 defmodule Eliver.VersionFile do
   @version_regex ~r/([0-9]+\.[0-9]+\.[0-9]+)/
-  @mix_version_regex ~r/version: ([0-9]+\.[0-9]+\.[0-9]+)/
+  @mix_version_regex ~r/version: "([0-9]+\.[0-9]+\.[0-9]+)"/
 
   def version(filename \\ "VERSION") do
     case File.read(filename) do
@@ -32,7 +32,7 @@ defmodule Eliver.VersionFile do
   defp rewrite_version(new_version, filename) do
     case File.read(filename) do
       {:ok, body} ->
-        new_contents = Regex.replace(@mix_version_regex, body, "version: #{new_version}")
+        new_contents = Regex.replace(@mix_version_regex, body, "version: '#{new_version}'")
 
         File.write(filename, new_contents)
 
