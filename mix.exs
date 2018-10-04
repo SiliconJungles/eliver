@@ -5,7 +5,7 @@ defmodule Eliver.Mixfile do
     [
       app: :eliver,
       version: String.trim(File.read!("VERSION")),
-      elixir: "~> 1.3",
+      elixir: "~> 1.7",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       description: "Interactive semantic versioning for Elixir packages",
